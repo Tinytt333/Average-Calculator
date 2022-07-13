@@ -42,7 +42,7 @@
                     catch                                                   // Then tell the user they put invalid stuff i guess
                     {
                         Console.WriteLine("Possible invalid entry (Try again)");
-                        inputCount += 150;
+                        inputCount--;
                     } // Ik this looks dumb but idk another way too do this (might change it later)
                     inputCount++;
                 }
