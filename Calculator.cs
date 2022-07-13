@@ -1,6 +1,6 @@
 ﻿namespace Average_Calculator
 {
-    class Program
+    class Calculator
     {
         static void Main(string[] args)
         {
