@@ -81,6 +81,7 @@
             {
                 Console.WriteLine(" ");
                 Console.WriteLine("Do it again....");
+                Console.WriteLine("In all known laws of physics, there is no way a bee can fly");
                 goto reCalculate;
             }
             Console.ReadLine();
