@@ -5,13 +5,14 @@
         static void Main(string[] args)
         {
             Console.WriteLine("######################################################################################");
-            Console.WriteLine("Enter numbers in and type 'END' to get the result (But you must have atleast 2 inputs)");
-            Console.WriteLine("'END' Will calculate the average of all the numbers you've entered");
+            Console.WriteLine("'END': Calculates all number entrys (Requires atleast 2 entrys)");
+            Console.WriteLine("'ENDr': Same as 'END' but allows you to calculate another set of numbers");
+            Console.WriteLine("'repeat:x:y;' Repeats one number for X entrys (ex. repeat:1.5:5; Repeats the number 1.5");
+            Console.WriteLine("For 5 Entrys (You can also use (ex. repeat:12.42;) to repeat 12.42, 12 times)");
+            Console.WriteLine(" ");
             Console.WriteLine("If you see a bunch of zeros followed by a small number, ignore it, thats an error that I cant fix");
             Console.WriteLine("                                         (ex: 14.000000000000000000000034)");
             Console.WriteLine("You can do around 65535 Numbers (If you'd like)");
-            Console.WriteLine(" ");
-            Console.WriteLine("Type 'ENDr' to get the result and calculate another set of numbers");
             Console.WriteLine("######################################################################################");
             reCalculate:
             bool allInputsComplete = false; // Initialize all variables
@@ -36,22 +37,36 @@
 
                     string tester2 = tester.Remove(0, 7);
                     tester2 = tester2.Replace(';', ' ');
+                    tester2 = tester2.Trim();
 
-                    string[] splitRepeat = tester2.Split(':',2);
-                    splitRepeat[0] = Convert.ToDouble(splitRepeat[0]);
+                    string[] splitRepeat = tester2.Split(':', 2);
 
-                    Console.WriteLine(splitRepeat[0]);
-                    /*
-                    string[] splitRepeat = tester.Split(':',2,"repeat");
-                    splitRepeat[1] = Convert.ToDouble(splitRepeat[1]);
-                    
-                    for (int i = 0; i < splitRepeat[1]; i++)
+                    if (splitRepeat.Length == 2)
                     {
-                        numbers[inputCount] = Convert.ToDouble(splitRepeat[2]);
-                        inputCount++;
+                        double[] splitRepeatD = new double[splitRepeat.Length];
+                        splitRepeatD[0] = Convert.ToDouble(splitRepeat[0]);
+                        splitRepeatD[1] = Convert.ToInt32(splitRepeat[1]);
+
+                        for (int i = 0; i < splitRepeatD[1]; i++)
+                        {
+                            numbers[inputCount] = splitRepeatD[0];
+                            Console.WriteLine("Entry " + inputCount + ": " + numbers[inputCount]);
+                            inputCount++;
+                        }
+                    } else if (splitRepeat.Length == 1) {
+                        string[] temp = splitRepeat[0].Split('.', 2);
+                        int splitRepeatD = Convert.ToInt32(temp[0]);
+
+                        for (int i = 1; i <= splitRepeatD; i++)
+                        {
+                            numbers[inputCount] = Convert.ToDouble(splitRepeat[0]);
+                            Console.WriteLine("Entry " + inputCount + ": " + numbers[inputCount]);
+                            inputCount++;
+                        }
+                    } else
+                    {
+                        Console.WriteLine("The repeat syntax you used was either too short or too long");
                     }
-                    Console.WriteLine(splitRepeat.Length);
-                    */
                 }
                 else if (inputCount >= 65534) {
                 inputCount = 65534;
@@ -75,7 +90,7 @@
             {
                 finalResult += numbers[i];
             }
-            finalResult = finalResult / inputCount;
+            finalResult /= inputCount;
             Console.WriteLine(finalResult);
             if (doCalculationsAgain)
             {
